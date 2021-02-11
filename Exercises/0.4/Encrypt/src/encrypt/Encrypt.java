@@ -27,10 +27,27 @@ public class Encrypt {
     }
     
     public static String encrypt(String s) {
+        if (s.length() < 3) {
+            ;
+        }
+        
         String newString = "";
         
+        newString += s.charAt(s.length()-1);
+        s = s.substring(0, s.length()-1);
         
+        char firstChar = s.charAt(0);
+        s = s.substring(1, s.length());
         
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ') {
+                newString += ' ';
+            } else {
+                newString += (char) ((int) s.charAt(i) + 2);
+            }
+        }
+        
+        newString += firstChar;
         
         return newString;
     }

@@ -26,14 +26,14 @@ public class AddPairs {
         int sum = 0;
         
         if (num.length() % 2 == 0) {
-            for (int i = 0; i <= num.length() - 2; i++) {
+            for (int i = 0; i <= num.length() - 2; i += 2) {
                 sum += Integer.parseInt(num.substring(i, i+2));
             }
         } else {
-            for (int i = 0; i <= num.length() - 3; i++) {
+            for (int i = 0; i <= num.length() - 3; i += 2) {
                 sum += Integer.parseInt(num.substring(i, i+2));
             }
-            sum += Integer.parseInt(Character.toString(num.charAt(-1)));
+            sum += Integer.parseInt(Character.toString(num.charAt(num.length()-1)));
         }
         
         System.out.println("Output: " + sum);
