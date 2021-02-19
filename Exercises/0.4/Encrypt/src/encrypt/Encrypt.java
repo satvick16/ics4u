@@ -27,11 +27,18 @@ public class Encrypt {
     }
     
     public static String encrypt(String s) {
-        if (s.length() < 3) {
-            ;
-        }
-        
         String newString = "";
+        
+        if (s.length() < 3) {
+            if (s.length() == 2) {
+                char firstChar = s.charAt(0);
+                char lastChar = s.charAt(s.length()-1);
+                newString += lastChar;
+                newString += firstChar;
+            } else {
+                // figure out what to do here
+            }
+        }
         
         newString += s.charAt(s.length()-1);
         s = s.substring(0, s.length()-1);
