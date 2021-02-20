@@ -26,7 +26,7 @@ public class Lesson4 {
         // .length()
         // .charAt()
         // .substring()
-            // "rnrtnern".substring(beginIndex, endIndex)
+            // "abcd".substring(beginIndex, endIndex)
             // returns string from beginIndex to endIndex-1
         
         // iterating through strings

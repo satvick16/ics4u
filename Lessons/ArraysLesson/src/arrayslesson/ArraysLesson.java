@@ -41,6 +41,9 @@ public class ArraysLesson {
         for (int num : nums) {
             System.out.println(num);
         }
+        
+        // printing arrays
+        System.out.println(Arrays.toString(nums));
     }
     
 }

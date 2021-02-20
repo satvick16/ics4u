@@ -21,7 +21,8 @@ public class ArraysExercises {
         
         // Q1();
         // Q2();
-        Q3();
+        // Q3();
+        // Q4();
     }
     
     public static void Q1() {
@@ -97,7 +98,74 @@ public class ArraysExercises {
     }
     
     public static void Q3() {
+        // get user input for array size
+        Scanner reader = new Scanner(System.in);
+        System.out.print("Enter an integer n: ");
+        int n = Integer.parseInt(reader.nextLine());
+        double[] arr = new double[n];
         
+        // get user inputs for array elements
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter a number: ");
+            arr[i] = Integer.parseInt(reader.nextLine());
+        }
+        
+        // calculate and print sum and average
+        double sum = 0;
+        
+        for (double num : arr) {
+            sum += num;
+        }
+        
+        double avg = sum / arr.length;
+        
+        System.out.println("Sum = " + sum);
+        System.out.println("Average = " + avg);
+        
+        // print elements "nicely"
+        for (int i = 0; i < arr.length-1; i++) {
+            System.out.print(arr[i] + ", ");
+        }
+        
+        System.out.println(arr[arr.length-1]);
+        
+        // calculate and print smallest element
+        double smallest = 9999;
+        
+        for (double num : arr) {
+            if (num < smallest) {
+                smallest = num;
+            }
+        }
+        
+        System.out.println("Smallest element = " + smallest);
+        
+        // print index of smallest value
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == smallest) {
+                System.out.println("Index = " + i);
+                break;
+            }
+        }
+    }
+    
+    public static void Q4() {
+        Scanner reader = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = reader.nextLine();
+        
+        // initialize char and String arrays
+        char[] charArr = new char[s.length()];
+        String[] strArr = new String[s.length()];
+        
+        // add chars to arrays
+        for (int i = 0; i < s.length(); i++) {
+            charArr[i] = s.charAt(i);
+            strArr[i] = Character.toString(s.charAt(i));
+        }
+        
+        System.out.println(Arrays.toString(charArr));
+        System.out.println(Arrays.toString(strArr));
     }
     
 }
