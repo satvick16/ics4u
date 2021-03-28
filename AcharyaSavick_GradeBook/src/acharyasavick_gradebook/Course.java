@@ -149,12 +149,16 @@ public class Course {
      */
     public double getAvg(ArrayList<Double> nums) {
         int sum = 0;
+        int numMarks = 0;
 
         for (double num : nums) {
-            sum += num;
+            if (num != -1) {
+                sum += num;
+                numMarks++;
+            }
         }
 
-        return sum / nums.size();
+        return sum / (double) numMarks;
     }
 
     /**
@@ -187,7 +191,7 @@ public class Course {
 
         return getAvg(marks);
     }
-    
+
     /**
      * Print all marks for an assignment including Student names.
      *

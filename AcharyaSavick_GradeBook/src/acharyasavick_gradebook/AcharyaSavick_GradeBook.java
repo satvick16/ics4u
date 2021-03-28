@@ -16,6 +16,7 @@ import java.util.Scanner;
  */
 public class AcharyaSavick_GradeBook {
 
+    // declare class-wide Scanner
     public static final Scanner reader = new Scanner(System.in);
 
     /**
@@ -24,18 +25,21 @@ public class AcharyaSavick_GradeBook {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // generate default csc100 course
         Course csc100 = generateDefaultCourse();
 
         System.out.println("Welcome to GradeBook, Mr. Cho!\n");
 
         while (true) {
             printMenu();
-            int option = getInt("Option: ", 1, 18);
+            int option = getInt("Your choice: ", 1, 20);
 
             System.out.println();
 
+            // each menu option is represented as a switch statement case
             switch (option) {
                 case 1:
+                    // add student to course
                     System.out.print("Enter student name: ");
                     String name1 = reader.nextLine();
 
@@ -45,13 +49,16 @@ public class AcharyaSavick_GradeBook {
                     csc100.addStudent(new Student(name1, id1));
                     System.out.println("Student " + name1 + " with student number " + id1 + " has been added.");
                     break;
+
                 case 2:
+                    // remove student from course
                     String nameOrID2 = getNameOrID();
 
                     csc100.removeStudent(nameOrID2);
                     System.out.println(nameOrID2 + " has been removed.");
                     break;
                 case 3:
+                    // edit name or student id of a student
                     String nameOrID3 = getNameOrID();
                     Student s3 = csc100.getStudent(nameOrID3);
 
@@ -72,6 +79,7 @@ public class AcharyaSavick_GradeBook {
 
                     break;
                 case 4:
+                    // add mark for a student
                     String nameOrID4 = getNameOrID();
                     Student s4 = csc100.getStudent(nameOrID4);
 
@@ -90,6 +98,7 @@ public class AcharyaSavick_GradeBook {
 
                     break;
                 case 5:
+                    // edit any mark for a student
                     String nameOrID5 = getNameOrID();
                     Student s5 = csc100.getStudent(nameOrID5);
 
@@ -105,6 +114,7 @@ public class AcharyaSavick_GradeBook {
 
                     break;
                 case 6:
+                    // edit any mark for a student
                     String nameOrID6 = getNameOrID();
                     Student s6 = csc100.getStudent(nameOrID6);
 
@@ -119,15 +129,18 @@ public class AcharyaSavick_GradeBook {
 
                     break;
                 case 7:
+                    // add assignment to course
                     csc100.addAssignment();
                     System.out.println("Assignment has been added.");
                     break;
                 case 8:
+                    // delete assignment from course
                     int num8 = getInt("Enter assignment number: ", 0, csc100.getNumAssignments() - 1);
                     csc100.deleteAssignment(num8);
                     System.out.println("Assignment " + num8 + " has been deleted.");
                     break;
                 case 9:
+                    // edit any mark for an assignment
                     String nameOrID9 = getNameOrID();
 
                     int num9 = getInt("Enter assignment number: ", 0, csc100.getNumAssignments() - 1);
@@ -137,6 +150,7 @@ public class AcharyaSavick_GradeBook {
                     System.out.println(nameOrID9 + "'s mark in assginment " + num9 + " has been changed to " + mark9);
                     break;
                 case 10:
+                    // edit all marks for an assignment
                     int num10 = getInt("Enter assignment number: ", 0, csc100.getNumAssignments() - 1);
 
                     for (Student s10 : csc100.getStudents()) {
@@ -146,19 +160,23 @@ public class AcharyaSavick_GradeBook {
 
                     break;
                 case 11:
+                    // print course average
                     System.out.printf("Course average %.1f\n", csc100.getCourseAvg());
                     break;
                 case 12:
+                    // print any assignment average
                     int num12 = getInt("Enter assignment number: ", 0, csc100.getNumAssignments() - 1);
                     System.out.printf("Assignment %d average: %.1f\n", num12, csc100.getAnyAssignmentAvg(num12));
                     break;
                 case 13:
+                    // print all assignment averages
                     for (int i = 0; i < csc100.getNumAssignments(); i++) {
                         System.out.printf("Assignment %d average: %.1f\n", i, csc100.getAnyAssignmentAvg(i));
                     }
 
                     break;
                 case 14:
+                    // print any student average
                     String nameOrID14 = getNameOrID();
                     Student s14 = csc100.getStudent(nameOrID14);
 
@@ -170,19 +188,23 @@ public class AcharyaSavick_GradeBook {
 
                     break;
                 case 15:
+                    // print all student averages
                     for (Student s15 : csc100.getStudents()) {
-                        System.out.printf("%s's average: %.1f\n", s15.getName(), s15.getAvg());
+                        System.out.printf(" %.1f\n", s15.getAvg());
                     }
 
                     break;
                 case 16:
+                    // print all students with their average
                     csc100.printAllStudentsAndAvgs();
                     break;
                 case 17:
+                    // print all marks in an assignment with names
                     int num17 = getInt("Enter assignment number: ", 0, csc100.getNumAssignments() - 1);
                     csc100.printAssignmentMarks(num17);
                     break;
                 case 18:
+                    // print all marks for a particular student
                     String nameOrID18 = getNameOrID();
                     Student s18 = csc100.getStudent(nameOrID18);
 
@@ -197,8 +219,28 @@ public class AcharyaSavick_GradeBook {
                     }
 
                     break;
+                case 19:
+                    // print all marks for all assignments with names
+                    for (int i = 0; i < csc100.getNumAssignments(); i++) {
+                        csc100.printAssignmentMarks(i);
+                        System.out.println();
+                    }
+                    
+                    break;
+                case 20:
+                    // print all marks for all students
+                    for (Student s : csc100.getStudents()) {
+                        System.out.println(s.getName());
+                        for (int i = 0; i < csc100.getNumAssignments(); i++) {
+                            System.out.println(" Assignment " + i + ": " + s.getMark(i));
+                        }
+                        System.out.println();
+                    }
+                    
+                    break;
             }
 
+            // ask whether user wants to continue using program or quit
             System.out.print("\nEnter 'M' or 'm' to proceed to main menu. Enter anything else to quit: ");
             String input = reader.nextLine();
 
@@ -272,24 +314,27 @@ public class AcharyaSavick_GradeBook {
      */
     public static void printMenu() {
         System.out.println("Please choose one of the following options:");
-        System.out.println(" 1 : add student to course");
-        System.out.println(" 2 : remove student from course");
-        System.out.println(" 3 : edit name or student id of a student");
-        System.out.println(" 4 : add mark for a student");
-        System.out.println(" 5 : edit any mark for a student");
-        System.out.println(" 6 : edit all marks for a student");
-        System.out.println(" 7 : add assignment to course");
-        System.out.println(" 8 : delete assignment from course");
-        System.out.println(" 9 : edit any mark for an assignment");
-        System.out.println("10 : edit all marks for an assignment");
-        System.out.println("11 : print course average");
-        System.out.println("12 : print any assignment average");
-        System.out.println("13 : print all assignment averages");
-        System.out.println("14 : print any student average");
-        System.out.println("15 : print all student averages");
-        System.out.println("16 : print all students with their average");
-        System.out.println("17 : print all marks in an assignment with names");
-        System.out.println("18 : print all marks for a particular student\n");
+        System.out.println("  1 : add student to course");
+        System.out.println("  2 : remove student from course");
+        System.out.println("  3 : edit name or student id of a student");
+        System.out.println("  4 : add mark for a student");
+        System.out.println("  5 : edit any mark for a student");
+        System.out.println("  6 : edit all marks for a student");
+        System.out.println("  7 : add assignment to course");
+        System.out.println("  8 : delete assignment from course");
+        System.out.println("  9 : edit any mark for an assignment");
+        System.out.println(" 10 : edit all marks for an assignment");
+        System.out.println(" 11 : print course average");
+        System.out.println(" 12 : print any assignment average");
+        System.out.println(" 13 : print all assignment averages");
+        System.out.println(" 14 : print any student average");
+        System.out.println(" 15 : print all student averages");
+        System.out.println(" 16 : print all students with their average");
+        System.out.println(" 17 : print all marks in an assignment with names");
+        System.out.println(" 18 : print all marks for a particular student");
+        System.out.println(" 19 : print all marks for all assignments with names");
+        System.out.println(" 20 : print all marks for all students");
+        System.out.println();
     }
 
     /**

@@ -19,7 +19,7 @@ public class Student {
     private ArrayList<Integer> marks;
 
     /**
-     * Create new Student object with provided name/id and empty marks
+     * Create new Student object with provided name/id and an empty marks
      * ArrayList.
      *
      * @param name The Student's name
@@ -116,14 +116,16 @@ public class Student {
      */
     public double getAvg() {
         int sum = 0;
+        int numMarks = 0;
 
         for (int mark : this.marks) {
             if (mark != -1) {
                 sum += mark;
+                numMarks++;
             }
         }
 
-        return sum / (double) this.marks.size();
+        return sum / (double) numMarks;
     }
 
 }
