@@ -6,6 +6,8 @@
 package payroll;
 
 /**
+ * An Employee object is an abstract class of Employee whose subclasses include
+ * FullTimeEmployee and PartTimeEmployee.
  *
  * @author 333526820
  */

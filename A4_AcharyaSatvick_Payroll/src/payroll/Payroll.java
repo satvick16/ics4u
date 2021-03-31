@@ -9,6 +9,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
+ * A Payroll Object is comprised of a list of Employee objects and can perform
+ * various functions, such as reading/writing/listing Employee info to a file,
+ * printing pay stubs and resetting the number of sick days.
  *
  * @author 333526820
  */
@@ -16,10 +19,21 @@ public class Payroll {
 
     private ArrayList<Employee> staffList;
 
+    /**
+     * Creates new Payroll object with an empty list of Employee objects.
+     */
     public Payroll() {
         this.staffList = new ArrayList<>();
     }
 
+    /**
+     * Read Employee data from a file, create new Employee objects and add them
+     * to the Payroll.
+     *
+     * @param fileName The name of the file to be read
+     * @return Whether true or false based on whether the file was successfully
+     * read
+     */
     public boolean loadStaffList(String fileName) {
         String line;
 
@@ -48,6 +62,13 @@ public class Payroll {
         }
     }
 
+    /**
+     * Save current Employee data to a file.
+     *
+     * @param fileName The name of the file to be written to
+     * @return true or false based on whether the file has been successfully
+     * written to.
+     */
     public boolean saveStaffList(String fileName) {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(fileName, true));
@@ -60,7 +81,7 @@ public class Payroll {
 
                 if (e instanceof FullTimeEmployee) {
                     out.write("full-time,");
-                    out.write(((FullTimeEmployee) e).getYearlySalary() + ",");
+                    out.write(e.pay() + ",");
                     out.write(e.getSickDays() + "");
                 } else {
                     out.write("full-time,");
@@ -68,6 +89,8 @@ public class Payroll {
                     out.write(((PartTimeEmployee) e).getHourlyWage() + ",");
                     out.write(e.getSickDays() + "");
                 }
+
+                out.newLine();
             }
 
             return true;
@@ -77,6 +100,11 @@ public class Payroll {
         }
     }
 
+    /**
+     * List the biographical information of each Employee on the Payroll.
+     *
+     * @return None
+     */
     public void listAllEmployees() {
         System.out.println("All Employees:");
 
@@ -87,6 +115,12 @@ public class Payroll {
         System.out.println("");
     }
 
+    /**
+     * Return an Employee from the Payroll based on their id.
+     *
+     * @param id The Employee's id
+     * @return The Employee (or null if the Employee does not exist)
+     */
     public Employee getEmployee(String id) {
         for (Employee e : this.staffList) {
             if (e.getEmployeeNumber().equals(id)) {
@@ -94,25 +128,59 @@ public class Payroll {
             }
         }
 
+        System.out.println("Employee " + id + " not found!\n");
         return null;
     }
 
+    /**
+     * Print an Employee's pay stub.
+     *
+     * @param id The Employee's id
+     * @return None
+     */
     public void printEmployeePayStub(String id) {
         Employee e = getEmployee(id);
-        e.printPayStub();
-    }
 
-    public void printAllPayStubs() {
-        for (Employee e : this.staffList) {
+        if (e != null) {
             e.printPayStub();
         }
     }
 
-    public void enterSickDay(String id, double amount) {
-        Employee e = getEmployee(id);
-        e.useSickDay(amount);
+    /**
+     * Print each Employee's pay stub.
+     *
+     * @return None
+     */
+    public void printAllPayStubs() {
+        System.out.println("All Employee Pay Stubs:");
+
+        for (Employee e : this.staffList) {
+            e.printPayStub();
+        }
+
+        System.out.println("");
     }
 
+    /**
+     * Use sick days for an Employee on the Payroll.
+     *
+     * @param id The Employee's id
+     * @param amount The amount of sick days to be used
+     * @return None
+     */
+    public void enterSickDay(String id, double amount) {
+        Employee e = getEmployee(id);
+
+        if (e != null) {
+            e.useSickDay(amount);
+        }
+    }
+
+    /**
+     * Reset the number of sick days left for each full-time Employee.
+     *
+     * @return None
+     */
     public void yearlySickDayReset() {
         for (Employee e : this.staffList) {
             if (e instanceof FullTimeEmployee) {
@@ -121,6 +189,11 @@ public class Payroll {
         }
     }
 
+    /**
+     * Reset the number of sick days taken for each part-time Employee.
+     *
+     * @return None
+     */
     public void monthlySickDayReset() {
         for (Employee e : this.staffList) {
             if (e instanceof PartTimeEmployee) {
