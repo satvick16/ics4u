@@ -6,7 +6,7 @@
 package payroll;
 
 /**
- * A PartTimeEmployee object is an extension of the Employee class with unique
+ * A PartTimeEmployee object is an subclass of the Employee class with unique
  * behaviors such as recording/reporting pay in a monthly format.
  *
  * @author 333526820

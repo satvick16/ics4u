@@ -6,7 +6,7 @@
 package payroll;
 
 /**
- * A FullTimeEmployee object is an extension of the Employee class with unique
+ * A FullTimeEmployee object is an subclass of the Employee class with unique
  * behaviors such as recording/reporting pay in a yearly format.
  *
  * @author 333526820
